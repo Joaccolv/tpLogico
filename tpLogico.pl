@@ -44,7 +44,19 @@ caracteristicas(Nombre, Caracteristicas):- perro(_, cocker(Nombre, _, _, _), Car
 caracteristicas(Nombre, Caracteristicas):- humano(Nombre, Caracteristicas).
 
 
+%3. Todos los perros se pueden enfermar antes de la competencia, pero sabemos, por estadística, 
+%que los perros de Lucía no se enferman ni tampoco aquellos que cumplan con el estándar racial. 
+%Así que debemos hacer el predicado que nos diga si un perro puede estar enfermo.
+%> puedeEstarEnfermo(ayudanteDeSanta).
+%true.
 
+puedeEstarEnfermo(NombrePerro):- perro(Duenio, cocker(NombrePerro, _, _, _),_),
+    Duenio \= lucia,
+    \+ estandarRacial(NombrePerro).
+puedeEstarEnfermo(NombrePerro):- perro(Duenio, beagle(NombrePerro, _, _),_),
+    Duenio \= lucia,
+    \+ estandarRacial(NombrePerro).
+puedeEstarEnfermo(_):- true.
 
 
 
