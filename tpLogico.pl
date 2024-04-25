@@ -56,7 +56,7 @@ puedeEstarEnfermo(NombrePerro):- perro(Duenio, cocker(NombrePerro, _, _, _),_),
 puedeEstarEnfermo(NombrePerro):- perro(Duenio, beagle(NombrePerro, _, _),_),
     Duenio \= lucia,
     \+ estandarRacial(NombrePerro).
-puedeEstarEnfermo(_):- true.
+puedeEstarEnfermo(NombrePerro):- perro(Duenio, NombrePerro, _), Duenio \= lucia.
 
 
 
