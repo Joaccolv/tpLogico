@@ -94,7 +94,11 @@ incluidos([X|Xs], Lista) :-
 sePareceASuDuenio(H, P) :- humano(H, RasgosH), rasgosPerro(P, RasgosP),
     incluidos(RasgosH, RasgosP).
 
- 
+%5. Como toda competencia tiene un ganador, queremos ver el dueño de perros 
+%que más chances tiene de ganar. Para eso, debe tener al menos 2 perros que 
+%cumplan con el estándar racial.
+puedeGanar(Duenio):-findall(Perro, (perro(Duenio,Perro, _), estandarRacial(Perro)), 
+                                 ListaCumplen),length(ListaCumplen, Cantidad),Cantidad >= 2.
 
 
 
