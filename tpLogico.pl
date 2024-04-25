@@ -47,7 +47,6 @@ caracteristicas(Nombre, Caracteristicas):- perro(_, beagle(Nombre, _, _), Caract
 caracteristicas(Nombre, Caracteristicas):- perro(_, cocker(Nombre, _, _, _), Caracteristicas).
 caracteristicas(Nombre, Caracteristicas):- humano(Nombre, Caracteristicas).
 
-
 %3. Todos los perros se pueden enfermar antes de la competencia, pero sabemos, por estadística, 
 %que los perros de Lucía no se enferman ni tampoco aquellos que cumplan con el estándar racial. 
 %Así que debemos hacer el predicado que nos diga si un perro puede estar enfermo.
@@ -62,14 +61,7 @@ puedeEstarEnfermo(NombrePerro):- perro(Duenio, beagle(NombrePerro, _, _),_),
     \+ estandarRacial(NombrePerro).
 puedeEstarEnfermo(NombrePerro):- perro(Duenio, NombrePerro, _), Duenio \= lucia.
 
-%5
-puedeGanar(Duenio):-findall(Perro, (perro(Duenio,Perro, _), estandarRacial(Perro)), 
-                                 ListaCumplen),length(ListaCumplen, Cantidad),Cantidad >= 2.
-
-
-
-/*
-4. Hay un dicho que dice que los perros se parecen a su dueño.
+%4. Hay un dicho que dice que los perros se parecen a su dueño.
 Veamos si podemos saber qué perros se parecen a qué humanos. Un perro 
 se parece a un humano si todos las características que tienen un humano,
 las tiene ese perro.
@@ -86,21 +78,30 @@ rasgosPerro(PerroComun, Rasgos):-perro(_, PerroComun, Rasgos).
 rasgosPerro(PerroRaza, Rasgos):-perro(_, cocker(PerroRaza, _, _, _), Rasgos).
 rasgosPerro(PerroRaza, Rasgos):-perro(_, beagle(PerroRaza, _, _), Rasgos).
 
-incluidos([], _).
-incluidos([X|Xs], Lista) :-
-    member(X, Lista),
-    incluidos(Xs, Lista).
+incluido(A, B):-forall(member(X, A), member(X, B)).
 
 sePareceASuDuenio(H, P) :- humano(H, RasgosH), rasgosPerro(P, RasgosP),
-    incluidos(RasgosH, RasgosP).
+    incluido(RasgosH, RasgosP).
 
 %5. Como toda competencia tiene un ganador, queremos ver el dueño de perros 
-%que más chances tiene de ganar. Para eso, debe tener al menos 2 perros que 
+%que mas chances tiene de ganar. Para eso, debe tener al menos 2 perros que 
 %cumplan con el estándar racial.
 puedeGanar(Duenio):-findall(Perro, (perro(Duenio,Perro, _), estandarRacial(Perro)), 
                                  ListaCumplen),length(ListaCumplen, Cantidad),Cantidad >= 2.
 
+%6. 6. Queremos verificar si todos los perros de una determinada raza tienen un peso dentro de cierto rango. 
+Implementa un predicado que verifique si todos los perros de una raza específica cumplen con esta condición.
 
+razaDePerro(beagle(_, _, _), beagle).
+razaDePerro(cocker(_, _, _, _), cocker).
+
+pesoPerro(beagle(_, _, Peso), Peso).
+pesoPerro(cocker(_, Peso, _, _), Peso).
+
+cumplen(Raza, PesoMinimo, PesoMaximo) :- findall(Peso, (perro(_, Perro, _), razaDePerro(Perro, Raza), pesoPerro(Perro, Peso)), ListaPesos), verificarPesosQueCumplen(ListaPesos, PesoMinimo, PesoMaximo). 
+
+verificarPesosQueCumplen([], _, _). 
+verificarPesosQueCumplen([Peso | Pesos], PesoMinimo, PesoMaximo):-(Peso >= PesoMinimo, Peso =< PesoMaximo) verificarPesosQueCumplen(Pesos, PesoMinimo, PesoMaximo).
 
 
 
