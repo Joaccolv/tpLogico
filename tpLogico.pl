@@ -66,7 +66,6 @@ puedeEstarEnfermo(NombrePerro):- perro(Duenio, NombrePerro, _), Duenio \= lucia.
 =======
 /*
 4. Hay un dicho que dice que los perros se parecen a su dueño.
->>>>>>> 996cda978b68bc7fbe52075aac320002d52656a6
 Veamos si podemos saber qué perros se parecen a qué humanos. Un perro 
 se parece a un humano si todos las características que tienen un humano,
 las tiene ese perro.
@@ -95,7 +94,7 @@ puedeGanar(Duenio):-findall(Perro, (perro(Duenio,Perro, _), estandarRacial(Perro
                                  ListaCumplen),length(ListaCumplen, Cantidad),Cantidad >= 2.
 
 %6. 6. Queremos verificar si todos los perros de una determinada raza tienen un peso dentro de cierto rango. 
-Implementa un predicado que verifique si todos los perros de una raza específica cumplen con esta condición.
+%Implementa un predicado que verifique si todos los perros de una raza específica cumplen con esta condición.
 
 razaDePerro(beagle(_, _, _), beagle).
 razaDePerro(cocker(_, _, _, _), cocker).
