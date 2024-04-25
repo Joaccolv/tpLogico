@@ -47,7 +47,6 @@ caracteristicas(Nombre, Caracteristicas):- perro(_, beagle(Nombre, _, _), Caract
 caracteristicas(Nombre, Caracteristicas):- perro(_, cocker(Nombre, _, _, _), Caracteristicas).
 caracteristicas(Nombre, Caracteristicas):- humano(Nombre, Caracteristicas).
 
-
 %3. Todos los perros se pueden enfermar antes de la competencia, pero sabemos, por estadística, 
 %que los perros de Lucía no se enferman ni tampoco aquellos que cumplan con el estándar racial. 
 %Así que debemos hacer el predicado que nos diga si un perro puede estar enfermo.
@@ -61,8 +60,6 @@ puedeEstarEnfermo(NombrePerro):- perro(Duenio, beagle(NombrePerro, _, _),_),
     Duenio \= lucia,
     \+ estandarRacial(NombrePerro).
 puedeEstarEnfermo(NombrePerro):- perro(Duenio, NombrePerro, _), Duenio \= lucia.
-
-
 
 /*
 4. Hay un dicho que dice que los perros se parecen a su dueño.
@@ -82,13 +79,10 @@ rasgosPerro(PerroComun, Rasgos):-perro(_, PerroComun, Rasgos).
 rasgosPerro(PerroRaza, Rasgos):-perro(_, cocker(PerroRaza, _, _, _), Rasgos).
 rasgosPerro(PerroRaza, Rasgos):-perro(_, beagle(PerroRaza, _, _), Rasgos).
 
-incluidos([], _).
-incluidos([X|Xs], Lista) :-
-    member(X, Lista),
-    incluidos(Xs, Lista).
+incluido(A, B):-forall(member(X, A), member(X, B)).
 
 sePareceASuDuenio(H, P) :- humano(H, RasgosH), rasgosPerro(P, RasgosP),
-    incluidos(RasgosH, RasgosP).
+    incluido(RasgosH, RasgosP).
 
 %5. Como toda competencia tiene un ganador, queremos ver el dueño de perros 
 %que más chances tiene de ganar. Para eso, debe tener al menos 2 perros que 
