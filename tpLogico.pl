@@ -62,6 +62,10 @@ puedeEstarEnfermo(NombrePerro):- perro(Duenio, beagle(NombrePerro, _, _),_),
     \+ estandarRacial(NombrePerro).
 puedeEstarEnfermo(NombrePerro):- perro(Duenio, NombrePerro, _), Duenio \= lucia.
 
+%5
+puedeGanar(Duenio):-findall(Perro, (perro(Duenio,Perro, _), estandarRacial(Perro)), 
+                                 ListaCumplen),length(ListaCumplen, Cantidad),Cantidad >= 2.
+
 
  
 
