@@ -60,6 +60,31 @@ puedeEstarEnfermo(NombrePerro):- perro(Duenio, NombrePerro, _), Duenio \= lucia.
 
 
 
+/*
+4. Hay un dicho que dice que los perros se parecen a su dueño.
+Veamos si podemos saber qué perros se parecen a qué humanos. Un perro 
+se parece a un humano si todos las características que tienen un humano,
+las tiene ese perro.
+> sePareceASuDuenio(X, Y).
+X = homero,
+Y = ayudanteDeSanta
+X = gise,
+Y = cocker(polo, 20, 41, macho)
+X = ralph,
+Y = beagle(kongo, 20, 15)
+X = ralph,
+Y = ayudanteDeSanta. */
+rasgosPerro(PerroComun, Rasgos):-perro(_, PerroComun, Rasgos).
+rasgosPerro(PerroRaza, Rasgos):-perro(_, cocker(PerroRaza, _, _, _), Rasgos).
+rasgosPerro(PerroRaza, Rasgos):-perro(_, beagle(PerroRaza, _, _), Rasgos).
+
+incluidos([], _).
+incluidos([X|Xs], Lista) :-
+    member(X, Lista),
+    incluidos(Xs, Lista).
+
+sePareceASuDuenio(H, P) :- humano(H, RasgosH), rasgosPerro(P, RasgosP),
+    incluidos(RasgosH, RasgosP).
 
 
 
