@@ -61,7 +61,12 @@ puedeEstarEnfermo(NombrePerro):- perro(Duenio, beagle(NombrePerro, _, _),_),
     \+ estandarRacial(NombrePerro).
 puedeEstarEnfermo(NombrePerro):- perro(Duenio, NombrePerro, _), Duenio \= lucia.
 
+<<<<<<< HEAD
 %4. Hay un dicho que dice que los perros se parecen a su dueño.
+=======
+/*
+4. Hay un dicho que dice que los perros se parecen a su dueño.
+>>>>>>> 996cda978b68bc7fbe52075aac320002d52656a6
 Veamos si podemos saber qué perros se parecen a qué humanos. Un perro 
 se parece a un humano si todos las características que tienen un humano,
 las tiene ese perro.
