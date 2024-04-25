@@ -21,12 +21,16 @@ humano(ralph, [tonto, carinioso]).
 %> estandarRacial(beagle(loquito, 36, 15)).
 %True %porque su altura es de 36 y está entre la altura necesaria
 
-estandarRacial(NombrePerro):- perro(_,beagle(NombrePerro,Altura,_),_),Altura >= 33, Altura =< 40.
-estandarRacial(NombrePerro):- perro(_,cocker(NombrePerro,Peso,Altura,hembra),_),
+estandarRacial(beagle(_, Altura, _)) :-
+    Altura >= 33, Altura =< 40.
+
+estandarRacial(cocker(_, Peso, Altura, hembra)) :-
     Altura >= 38, Altura =< 39, Peso >= 13, Peso =< 15.
-estandarRacial(NombrePerro):- perro(_,cocker(NombrePerro,Peso,Altura,macho),_),
+
+estandarRacial(cocker(_, Peso, Altura, macho)) :-
     Altura >= 39, Altura =< 41, Peso >= 13, Peso =< 15.
-estandarRacial(_):- false.
+
+estandarRacial(_):-  false.
 
 %2Ahora necesitamos obtener cada una de las características indistintamente de si es un humano o un perro.
 %>caracteristica(beagle(A, _, _), X).
@@ -86,7 +90,7 @@ incluidos([X|Xs], Lista) :-
 sePareceASuDuenio(H, P) :- humano(H, RasgosH), rasgosPerro(P, RasgosP),
     incluidos(RasgosH, RasgosP).
 
-
+ 
 
 
 
