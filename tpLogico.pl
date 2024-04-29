@@ -53,10 +53,10 @@ caracteristicas(Nombre, Caracteristicas):- humano(Nombre, Caracteristicas).
 
 puedeEstarEnfermo(NombrePerro):- perro(Duenio, cocker(NombrePerro, _, _, _),_),
     Duenio \= lucia,
-    not estandarRacial(NombrePerro).
+    not(estandarRacial(NombrePerro)).
 puedeEstarEnfermo(NombrePerro):- perro(Duenio, beagle(NombrePerro, _, _),_),
     Duenio \= lucia,
-    not estandarRacial(NombrePerro).
+    not(estandarRacial(NombrePerro)).
 puedeEstarEnfermo(NombrePerro):- perro(Duenio, NombrePerro, _), Duenio \= lucia.
 
 /*
