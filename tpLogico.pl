@@ -97,10 +97,15 @@ razaDePerro(cocker(_, _, _, _), cocker).
 pesoPerro(beagle(_, _, Peso), Peso).
 pesoPerro(cocker(_, Peso, _, _), Peso).
 
-cumplen(Raza, PesoMinimo, PesoMaximo) :- findall(Peso, (perro(_, Perro, _), razaDePerro(Perro, Raza), pesoPerro(Perro, Peso)), ListaPesos), verificarPesosQueCumplen(ListaPesos, PesoMinimo, PesoMaximo). 
+cumplen(Raza, PesoMinimo, PesoMaximo) :- 
+    findall(Peso, (perro(_, Perro, _), razaDePerro(Perro, Raza),
+    pesoPerro(Perro, Peso)), ListaPesos), 
+    forall(member(X,ListaPesos),enRango(PesoMinimo,PesoMaximo,X)). 
 
-verificarPesosQueCumplen([], _, _). 
-verificarPesosQueCumplen([Peso | Pesos], PesoMinimo, PesoMaximo):-(Peso >= PesoMinimo, Peso =< PesoMaximo) verificarPesosQueCumplen(Pesos, PesoMinimo, PesoMaximo).
+
+enRango(NumeroMax, NumeroMin, X):- 
+    X =< NumeroMin,
+    X >= NumeroMax.
 
 
 
