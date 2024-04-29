@@ -1,0 +1,28 @@
+1-- 
+estandarRacial(beagle(loquito, 36, 15)).
+estandarRacial(cocker(susi, 13, 38, hembra)).
+estandarRacial(cocker(polo, 20, 41, macho)).
+estandarRacial(ayudanteDesanta).
+
+
+2--
+caracteristica(beagle(A, _, _), X).
+
+3--
+puedeEstarEnfermo(ayudanteDeSanta).
+puedeEstarEnfermo(kongo).
+puedeEstarEnfermo(polo).
+
+4--
+sePareceASuDuenio(homero, ayudanteDeSanta).
+sePareceASuDuenio(lucia, kongo).
+sePareceASuDuenio(gise, polo).
+
+5--
+puedeGanar(homero).
+puedeGanar(susi).
+puedeGanar(kongo).
+
+6--
+cumplen(cocker, 0, 100). -- Para que de un true si o si
+cumplen(cocker, 0, 1). -- Para que de un false si o si
