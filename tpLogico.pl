@@ -51,13 +51,15 @@ caracteristicas(Nombre, Caracteristicas):- humano(Nombre, Caracteristicas).
 %> puedeEstarEnfermo(ayudanteDeSanta).
 %true.
 
-puedeEstarEnfermo(NombrePerro):- perro(Duenio, cocker(NombrePerro, _, _, _),_),
+puedeEstarEnfermo(NombrePerro) :-
+    perro(Duenio, Perro, _),
     Duenio \= lucia,
-    not(estandarRacial(NombrePerro)).
-puedeEstarEnfermo(NombrePerro):- perro(Duenio, beagle(NombrePerro, _, _),_),
-    Duenio \= lucia,
-    not(estandarRacial(NombrePerro)).
-puedeEstarEnfermo(NombrePerro):- perro(Duenio, NombrePerro, _), Duenio \= lucia.
+    not(estandarRacial(Perro)),
+    nombrePerroEnfermo(Perro, NombrePerro).
+
+nombrePerroEnfermo(cocker(NombrePerro, _, _, _), NombrePerro).
+nombrePerroEnfermo(beagle(NombrePerro, _, _), NombrePerro).
+nombrePerroEnfermo(NombrePerro, NombrePerro).
 
 /*
 4. Hay un dicho que dice que los perros se parecen a su dueño.
