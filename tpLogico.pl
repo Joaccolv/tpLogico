@@ -30,8 +30,6 @@ estandarRacial(cocker(_, Peso, Altura, hembra)) :-
 estandarRacial(cocker(_, Peso, Altura, macho)) :-
     Altura >= 39, Altura =< 41, Peso >= 13, Peso =< 15.
 
-estandarRacial(_):-  false.
-
 %2Ahora necesitamos obtener cada una de las características indistintamente de si es un humano o un perro.
 %>caracteristica(beagle(A, _, _), X).
 %A = kongo,
@@ -55,10 +53,10 @@ caracteristicas(Nombre, Caracteristicas):- humano(Nombre, Caracteristicas).
 
 puedeEstarEnfermo(NombrePerro):- perro(Duenio, cocker(NombrePerro, _, _, _),_),
     Duenio \= lucia,
-    \+ estandarRacial(NombrePerro).
+    not estandarRacial(NombrePerro).
 puedeEstarEnfermo(NombrePerro):- perro(Duenio, beagle(NombrePerro, _, _),_),
     Duenio \= lucia,
-    \+ estandarRacial(NombrePerro).
+    not estandarRacial(NombrePerro).
 puedeEstarEnfermo(NombrePerro):- perro(Duenio, NombrePerro, _), Duenio \= lucia.
 
 /*
