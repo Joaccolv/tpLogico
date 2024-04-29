@@ -73,14 +73,12 @@ X = ralph,
 Y = beagle(kongo, 20, 15)
 X = ralph,
 Y = ayudanteDeSanta. */
-rasgosPerro(PerroComun, Rasgos):-perro(_, PerroComun, Rasgos).
-rasgosPerro(PerroRaza, Rasgos):-perro(_, cocker(PerroRaza, _, _, _), Rasgos).
-rasgosPerro(PerroRaza, Rasgos):-perro(_, beagle(PerroRaza, _, _), Rasgos).
 
 incluido(A, B):-forall(member(X, A), member(X, B)).
 
-sePareceASuDuenio(H, P) :- humano(H, RasgosH), rasgosPerro(P, RasgosP),
-    incluido(RasgosH, RasgosP).
+sePareceASuDuenio(Humano, Perro) :-caracteristicas(Humano, CaracteristicasHumano),  
+   	caracteristicas(Perro, CaracteristicasPerro),      
+    incluido(CaracteristicasHumano, CaracteristicasPerro).
 
 %5. Como toda competencia tiene un ganador, queremos ver el dueño de perros 
 %que mas chances tiene de ganar. Para eso, debe tener al menos 2 perros que 
