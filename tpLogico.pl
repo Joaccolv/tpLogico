@@ -57,9 +57,9 @@ puedeEstarEnfermo(NombrePerro) :-
     not(estandarRacial(Perro)),
     nombrePerroEnfermo(Perro, NombrePerro).
 
-nombrePerroEnfermo(cocker(NombrePerro, _, _, _), NombrePerro).
-nombrePerroEnfermo(beagle(NombrePerro, _, _), NombrePerro).
-nombrePerroEnfermo(NombrePerro, NombrePerro).
+nombrePerro(cocker(NombrePerro, _, _, _), NombrePerro).
+nombrePerro(beagle(NombrePerro, _, _), NombrePerro).
+nombrePerro(NombrePerro, NombrePerro).
 
 /*
 4. Hay un dicho que dice que los perros se parecen a su dueño.
