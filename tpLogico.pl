@@ -85,7 +85,7 @@ sePareceASuDuenio(Humano, Perro) :-caracteristicas(Humano, CaracteristicasHumano
 %5. Como toda competencia tiene un ganador, queremos ver el dueño de perros 
 %que mas chances tiene de ganar. Para eso, debe tener al menos 2 perros que 
 %cumplan con el estándar racial.
-puedeGanar(Duenio):-findall(Perro, (perro(Duenio,Perro, _), estandarRacial(Perro)), 
+puedeGanar(Duenio):perro(Duenio, _, _),-findall(Perro, (perro(Duenio,Perro, _), estandarRacial(Perro)), 
                                  ListaCumplen),length(ListaCumplen, Cantidad),Cantidad >= 2.
 
 %6. 6. Queremos verificar si todos los perros de una determinada raza tienen un peso dentro de cierto rango. 
