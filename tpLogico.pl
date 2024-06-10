@@ -30,6 +30,11 @@ estandarRacial(cocker(_, Peso, Altura, hembra)) :-
 estandarRacial(cocker(_, Peso, Altura, macho)) :-
     Altura >= 39, Altura =< 41, Peso >= 13, Peso =< 15.
 
+#cumpleEstandar(cocker(_, Peso, Altura, Genero), PesoMinimmo, PesoMaximo, AlturaMinimo, AlturaMaximo):-
+#   Altura >= AlturaMinimo, Altura =< AlturaMaxima, Peso >= PesoMinimo, Peso =< PesoMaximo. 
+#idea de como se puede hacer para no repetir codigo
+
+
 %2Ahora necesitamos obtener cada una de las características indistintamente de si es un humano o un perro.
 %>caracteristica(beagle(A, _, _), X).
 %A = kongo,
