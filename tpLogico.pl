@@ -60,7 +60,7 @@ puedeEstarEnfermo(NombrePerro) :-
     perro(Duenio, Perro, _),
     Duenio \= lucia,
     not(estandarRacial(Perro)),
-    nombrePerroEnfermo(Perro, NombrePerro).
+    nombrePerro(Perro, NombrePerro).
 
 nombrePerro(cocker(NombrePerro, _, _, _), NombrePerro).
 nombrePerro(beagle(NombrePerro, _, _), NombrePerro).
@@ -102,12 +102,10 @@ razaDePerro(cocker(_, _, _, _), cocker).
 pesoPerro(beagle(_, _, Peso), Peso).
 pesoPerro(cocker(_, Peso, _, _), Peso).
 
-cumplen(Raza, PesoMinimo, PesoMaximo) :- 
-    findall(Peso, (perro(_, Perro, _), razaDePerro(Perro, Raza),
-    pesoPerro(Perro, Peso)), ListaPesos), 
-    forall(member(X,ListaPesos),enRango(PesoMinimo,PesoMaximo,X)). 
-
-
+cumplen(Raza, PesoMinimo, PesoMaximo) :-
+    forall((perro(_, Perro, _), razaDePerro(Perro, Raza), pesoPerro(Perro, Peso)),
+           (Peso >= PesoMinimo, Peso =< PesoMaximo)).
+           
 enRango(NumeroMax, NumeroMin, X):- 
     X =< NumeroMin,
     X >= NumeroMax.
