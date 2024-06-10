@@ -3,6 +3,7 @@
 %perro(duenio, perro, caracteristicas del perro)
 perro(lucia, beagle(kongo, 20, 15), [jugueton, carinioso, tonto]).
 perro(lucia, cocker(susi, 13, 38, hembra), [inteligente, bueno]).
+perro(lucia, cocker(nana, 13, 38, hembra), [inteligente, bueno]).
 perro(gise, cocker(polo, 20, 41, macho), [malo, inteligente]).
 perro(homero,ayudanteDeSanta, [carinioso,tonto, vago]).
 gato(senioraDeLosGatos, flufy).
@@ -22,17 +23,13 @@ humano(ralph, [tonto, carinioso]).
 %True %porque su altura es de 36 y está entre la altura necesaria
 
 estandarRacial(beagle(_, Altura, _)) :-
-    Altura >= 33, Altura =< 40.
+    enRango(40, 33, Altura).
 
 estandarRacial(cocker(_, Peso, Altura, hembra)) :-
-    Altura >= 38, Altura =< 39, Peso >= 13, Peso =< 15.
+    enRango(39, 38, Altura), enRango(15, 13, Peso).
 
 estandarRacial(cocker(_, Peso, Altura, macho)) :-
-    Altura >= 39, Altura =< 41, Peso >= 13, Peso =< 15.
-
-#cumpleEstandar(cocker(_, Peso, Altura, Genero), PesoMinimmo, PesoMaximo, AlturaMinimo, AlturaMaximo):-
-#   Altura >= AlturaMinimo, Altura =< AlturaMaxima, Peso >= PesoMinimo, Peso =< PesoMaximo. 
-#idea de como se puede hacer para no repetir codigo
+    enRango(41, 39, Altura), enRango(15, 13, Peso).
 
 
 %2Ahora necesitamos obtener cada una de las características indistintamente de si es un humano o un perro.
@@ -90,7 +87,7 @@ sePareceASuDuenio(Humano, Perro) :-caracteristicas(Humano, CaracteristicasHumano
 %5. Como toda competencia tiene un ganador, queremos ver el dueño de perros 
 %que mas chances tiene de ganar. Para eso, debe tener al menos 2 perros que 
 %cumplan con el estándar racial.
-puedeGanar(Duenio):perro(Duenio, _, _),-findall(Perro, (perro(Duenio,Perro, _), estandarRacial(Perro)), 
+puedeGanar(Duenio):-humano(Duenio, _),findall(Perro, (perro(Duenio,Perro, _), estandarRacial(Perro)), 
                                  ListaCumplen),length(ListaCumplen, Cantidad),Cantidad >= 2.
 
 %6. 6. Queremos verificar si todos los perros de una determinada raza tienen un peso dentro de cierto rango. 
@@ -102,14 +99,13 @@ razaDePerro(cocker(_, _, _, _), cocker).
 pesoPerro(beagle(_, _, Peso), Peso).
 pesoPerro(cocker(_, Peso, _, _), Peso).
 
-cumplen(Raza, PesoMinimo, PesoMaximo) :-
-    forall((perro(_, Perro, _), razaDePerro(Perro, Raza), pesoPerro(Perro, Peso)),
+cumplen(Raza, PesoMinimo, PesoMaximo) :-razaDePerro(Perro, Raza),
+    forall((perro(_, Perro, _), pesoPerro(Perro, Peso)),
            (Peso >= PesoMinimo, Peso =< PesoMaximo)).
            
 enRango(NumeroMax, NumeroMin, X):- 
-    X =< NumeroMin,
-    X >= NumeroMax.
-
+    X =< NumeroMax,
+    X >= NumeroMin.
 
 
 
