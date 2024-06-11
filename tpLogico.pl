@@ -99,9 +99,9 @@ razaDePerro(cocker(_, _, _, _), cocker).
 pesoPerro(beagle(_, _, Peso), Peso).
 pesoPerro(cocker(_, Peso, _, _), Peso).
 
-cumplen(Raza, PesoMinimo, PesoMaximo) :-
-    forall((perro(_, Perro, _), razaDePerro(Perro,Raza)),(pesoPerro(Perro, Peso)),
-           (enRango(PesoMaximo,PesoMinimo,Peso))).
+cumplen(Raza, PesoMinimo, PesoMaximo) :-razaDePerro(Perro, Raza),
+    forall((perro(_, Perro, _), pesoPerro(Perro, Peso)),
+           (enRango(PesoMaximo,PesoMinimo, Peso))).
            
 enRango(NumeroMax, NumeroMin, X):- 
     X =< NumeroMax,
