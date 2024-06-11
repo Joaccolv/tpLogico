@@ -99,7 +99,7 @@ razaDePerro(cocker(_, _, _, _), cocker).
 pesoPerro(beagle(_, _, Peso), Peso).
 pesoPerro(cocker(_, Peso, _, _), Peso).
 
-cumplen(Raza, PesoMinimo, PesoMaximo) :-razaDePerro(Perro, Raza),perro(_, Perro, _),
+cumplen(Raza, PesoMinimo, PesoMaximo) :-razaDePerro( _, Raza),
     forall((perro(_, Perro, _), razaDePerro(Perro, Raza),pesoPerro(Perro, Peso)),
            (enRango(PesoMaximo,PesoMinimo, Peso))).
            
